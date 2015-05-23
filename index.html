@@ -1,1 +1,168 @@
-moi
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Words</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Words">
+  <meta name="author" content="Qpias">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Words</h1>
+    <h2>Show word frequencies for any website</h2>
+    <p>Qpias<br/>Data guy from Helsinki, Finland</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Words app</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Insert URL in the textbox, select how many of the most common words you want to see listed, and click button.</p>
+
+<ul>
+<li>app: <a href="https://qpias.shinyapps.io/words">https://qpias.shinyapps.io/words</a></li>
+<li>code: <a href="https://github.com/qpias/words">https://github.com/qpias/words</a></li>
+</ul>
+
+<h2>Motivation</h2>
+
+<p>I like to use R for text mining, especially to understand the content of documents. A simple text mining approach is &quot;bag-of-words&quot; where words are extracted disregarding form and order. Often you can figure out the topic of the document from the most common words.
+<br/><br/>
+<a href="http://en.wikipedia.org/wiki/Bag-of-words_model">http://en.wikipedia.org/wiki/Bag-of-words_model</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>What</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>The application uses the &quot;tm&quot; library to extract word counts from text documents.</li>
+<li>HTML tags are removed</li>
+<li>English stopwords (most common words) and common JavaScript words are removed
+<br/><br/>
+<a href="http://cran.r-project.org/web/packages/tm/index.html">http://cran.r-project.org/web/packages/tm/index.html</a> </li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Example</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(tm)
+library(xtable)
+corpus = Corpus(VectorSource(&quot;hello ciao bye bye&quot;))
+fm = as.matrix(DocumentTermMatrix(corpus))
+rownames(fm) = &quot;frequencies&quot;
+print(xtable(fm), type = &quot;html&quot;)
+</code></pre>
+
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+
+<!-- Sat May 23 18:15:42 2015 -->
+
+<table border=1>
+<tr> <th>  </th> <th> bye </th> <th> ciao </th> <th> hello </th>  </tr>
+  <tr> <td align="right"> frequencies </td> <td align="right"> 2.00 </td> <td align="right"> 1.00 </td> <td align="right"> 1.00 </td> </tr>
+   </table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Problems</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>I originally stemmed the words, but the SnowballC library is not supported by shinyapps.io, and needs to be installed.</li>
+<li>Could not find an easy way  to remove all JavaScript
+<br/><br/>
+<a href="http://en.wikipedia.org/wiki/Stemming">http://en.wikipedia.org/wiki/Stemming</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Words app'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Example'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Problems'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
